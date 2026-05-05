@@ -1,0 +1,8 @@
+cd "C:\Users\laksh\major project 8th sem\backend"
+venv\Scripts\activate
+uvicorn app.main:app --reload
+
+cd "C:\Users\laksh\major project 8th sem\frontend"
+npm run dev
+
+uvicorn app.main:app 
