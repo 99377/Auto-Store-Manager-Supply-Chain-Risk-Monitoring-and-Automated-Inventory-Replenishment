@@ -1,3 +1,4 @@
+
 # Auto Store Manager - Supplier Risk + Smart Inventory Auto-Replenishment
 
 Auto Store Manager is a full-stack application for small and medium retail businesses (for example, kirana stores) to:
@@ -260,4 +261,7 @@ At minimum:
 - Product synonym/fuzzy matching (beyond exact names)
 - Multi-branch inventory support
 - Advanced demand forecasting for reorder quantity
+
+=======
+# Auto-Store-Manager-project
 
