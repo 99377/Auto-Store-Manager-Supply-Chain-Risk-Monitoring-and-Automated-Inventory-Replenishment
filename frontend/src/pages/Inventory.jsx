@@ -479,7 +479,7 @@ export default function Inventory() {
               <input
                 readOnly
                 style={inp}
-                value={`http://127.0.0.1:8000${integration.sync_url || '/api/billing/sync/machine'}`}
+                value={`${import.meta.env.VITE_API_BASE_URL || window.location.origin}${integration.sync_url || '/api/billing/sync/machine'}`}
               />
             </div>
 

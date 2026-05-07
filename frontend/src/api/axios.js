@@ -1,7 +1,9 @@
 import axios from 'axios';
 
 const API = axios.create({
-  baseURL: 'http://127.0.0.1:8000',
+  // For local dev this defaults to your current setup.
+  // On Render, set `VITE_API_BASE_URL` to your backend URL at build time.
+  baseURL: import.meta.env.VITE_API_BASE_URL || 'http://127.0.0.1:8000',
 });
 
 API.interceptors.request.use((config) => {
