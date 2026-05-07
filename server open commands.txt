@@ -1,8 +1,7 @@
-cd "C:\Users\laksh\major project 8th sem\backend"
-venv\Scripts\activate
-uvicorn app.main:app --reload
+cd "E:\major project 8th sem\backend"
+.\venv\Scripts\Activate.ps1
+python -m uvicorn app.main:app --reload --host 127.0.0.1 --port 8000
 
-cd "C:\Users\laksh\major project 8th sem\frontend"
+cd "E:\major project 8th sem\frontend"
+npm install
 npm run dev
-
-uvicorn app.main:app 
