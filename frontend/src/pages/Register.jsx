@@ -25,11 +25,29 @@ export default function Register() {
     setLoading(true); setError('');
     try {
       const res = await API.post('/api/auth/register', form);
-      const token = res.data?.token || res.data?.access_token;
-      const user = res.data?.user || res.data?.data?.user;
-      if (!token || !user) {
-        throw new Error('Invalid registration response');
+      let token = res.data?.token || res.data?.access_token;
+      let user = res.data?.user || res.data?.data?.user;
+
+      // Some backends register successfully but return only a message.
+      // In that case, immediately log in with the same credentials.
+      if (!token) {
+        const loginRes = await API.post('/api/auth/login', {
+          email: form.email,
+          password: form.password,
+        });
+        token = loginRes.data?.token || loginRes.data?.access_token;
+        user = loginRes.data?.user || loginRes.data?.data?.user;
       }
+
+      if (!token) throw new Error('Registration succeeded but login token is missing');
+      if (!user) {
+        user = {
+          name: form.name,
+          email: form.email,
+          business_name: form.business_name,
+        };
+      }
+
       login(user, token);
       navigate('/dashboard');
     } catch (err) {
