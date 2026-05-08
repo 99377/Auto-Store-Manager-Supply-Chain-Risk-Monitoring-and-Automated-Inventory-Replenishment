@@ -4,7 +4,9 @@ const AuthContext = createContext();
 
 export function AuthProvider({ children }) {
   const [user, setUser] = useState(null);
-  const [token, setToken] = useState(localStorage.getItem('token'));
+  const [token, setToken] = useState(
+    localStorage.getItem('token') || localStorage.getItem('access_token')
+  );
 
   useEffect(() => {
     const savedUser = localStorage.getItem('user');
@@ -15,6 +17,7 @@ export function AuthProvider({ children }) {
     setUser(userData);
     setToken(tokenData);
     localStorage.setItem('token', tokenData);
+    localStorage.setItem('access_token', tokenData);
     localStorage.setItem('user', JSON.stringify(userData));
   };
 
@@ -22,6 +25,7 @@ export function AuthProvider({ children }) {
     setUser(null);
     setToken(null);
     localStorage.removeItem('token');
+    localStorage.removeItem('access_token');
     localStorage.removeItem('user');
   };
 

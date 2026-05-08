@@ -25,10 +25,15 @@ export default function Register() {
     setLoading(true); setError('');
     try {
       const res = await API.post('/api/auth/register', form);
-      login(res.data.user, res.data.token);
+      const token = res.data?.token || res.data?.access_token;
+      const user = res.data?.user || res.data?.data?.user;
+      if (!token || !user) {
+        throw new Error('Invalid registration response');
+      }
+      login(user, token);
       navigate('/dashboard');
     } catch (err) {
-      setError(err.response?.data?.detail || 'Registration failed');
+      setError(err.response?.data?.detail || err.message || 'Registration failed');
     }
     setLoading(false);
   };
